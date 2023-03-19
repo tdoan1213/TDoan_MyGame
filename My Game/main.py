@@ -1,5 +1,5 @@
 # File created by Tim Doan
-# i changed something again
+
 # import libs
 import pygame as pg
 import random
@@ -8,6 +8,8 @@ import os
 from settings import *
 from sprites import *
 # from pg.sprite import Sprite
+
+vec = pg.math.Vector2
 
 # set up assets folders
 game_folder = os.path.dirname(__file__)
@@ -32,8 +34,17 @@ player = Player()
 
 # player is instantiated here
 player = Player()
+player.rect.x = 5
 invader = Mob()
+invader.image.fill((0,0,255))
+invader.vel = vec(randint(8,80), randint(8,80))
 
+for i in range(0,10):
+    m = Mob()
+    m.vel = vec(randint(10,50),randint(10,50))
+    all_sprites.add(m)
+    enemies.add(m)
+    
 # testSprite = Sprite()
 # testSprite.image = pg.Surface((50,50))
 # testSprite.image.fill(GREEN)
