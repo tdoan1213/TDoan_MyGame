@@ -1,4 +1,4 @@
-# File created by Tim Doan
+# File created by: Tim Doan
 
 import pygame as pg
 
@@ -6,16 +6,17 @@ from pygame.sprite import Sprite
 
 from settings import *
 
-from random import randint
-
 vec = pg.math.Vector2
 
-# create a player 
+
+# create a player
 
 class Player(Sprite):
-    def __init__(self):
+    def __init__(self, game):
         Sprite.__init__(self)
+        self.game = game
         self.image = pg.Surface((50,50))
+        # self.image = pg.transform.scale((50, 38))
         self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.pos = vec(WIDTH/2, HEIGHT/2)
@@ -33,20 +34,27 @@ class Player(Sprite):
             self.acc.y = PLAYER_ACC
         if keystate[pg.K_d]:
             self.acc.x = PLAYER_ACC
+    # def jump(self):
+    #     # jump only if standing on a platform
+    #     self.rect.x += 1
+    #     hits = pg.sprite.spritecollide(self, self.game.platforms, False)
+    #     self.rect.x -= 1
+    #     if hits:
+    #         self.vel.y = -PLAYER_JUMP
     def update(self):
         self.acc = self.vel * PLAYER_FRICTION
         self.input()
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
         self.rect.center = self.pos
-        if self.rect.x > 0:
-            print("off the right")
+        if self.rect.x > WIDTH:
+            print("I'm off the right screen...")
         if self.rect.x < 0:
-            print("off the left")
-        if self.rect.y > 0:
-            print("off the top")
+            print("I'm off the left screen...")
         if self.rect.y < 0:
-            print("off the bottom")
+            print("I'm off the top screen...")
+        if self.rect.y > HEIGHT:
+            print("I'm off the bottom screen...")
 
 class Mob(Sprite):
     def __init__(self):
@@ -60,26 +68,11 @@ class Mob(Sprite):
         self.cofric = 0.1
         self.canjump = False
     def behavior(self):
-        self.acc.x = -MOB_ACC
-        self.acc.x = MOB_ACC
-        self.acc.y = MOB_ACC
-        self.acc.y = -MOB_ACC
-        if self.rect.x > WIDTH:
-            print("mob off the right")
-            self.acc.x = MOB_ACC
-        if self.rect.x < WIDTH:
-            print("mob off the left")
-            self.acc.x = -MOB_ACC
-        if self.rect.y > HEIGHT:
-            print("mob off the top")
-            self.acc.y = -MOB_ACC
-        if self.rect.y < HEIGHT:
-            print("mob off the bottom")
-            self.acc.y = MOB_ACC
+        if self.rect.x > WIDTH or self.rect.x < 0 or self.rect.y > HEIGHT or self.rect.y < 0:
+            self.vel *= -1
+
     def update(self):
-        self.acc = self.vel * PLAYER_FRICTION
         self.behavior()
-        self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
+        self.pos += self.vel
         self.rect.center = self.pos
         
