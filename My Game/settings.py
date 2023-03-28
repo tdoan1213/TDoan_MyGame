@@ -1,4 +1,4 @@
-#File created by Tim Doan
+# File created by Tim Doan
 
 # screen dimensions
 WIDTH = 800
@@ -11,6 +11,8 @@ RUNNING = True
 # player attributes
 PLAYER_ACC = 2
 PLAYER_FRICTION = 0.12
+PLAYER_GRAV = 0.8
+PLAYER_JUMP = 15
 
 # mob attributes
 MOB_ACC = 0.5
@@ -21,3 +23,4 @@ BLACK = (0,0,0)
 BLUE = (50,50,255)
 RED = (255,50,50)
 WHITE = (255,255,255)
+GREEN = (0,255,0)
