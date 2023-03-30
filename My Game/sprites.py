@@ -14,7 +14,7 @@ class Player(Sprite):
         # these are the properties
         self.game = game
         self.image = pg.Surface((50,50))
-        self.image.fill(BLACK)
+        self.image.fill(BLUE)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, HEIGHT/2)
         self.pos = vec(WIDTH/2, HEIGHT/2)
@@ -117,8 +117,7 @@ class Platform(Sprite):
         self.width = width
         self.height = height
         self.image = pg.Surface((self.width,self.height))
-        self.color = color
-        self.image.fill(self.color)
+        self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

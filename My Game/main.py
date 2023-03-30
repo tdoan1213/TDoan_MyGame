@@ -12,6 +12,8 @@
 '''
 My goal is:
 add collision to the sides of the screen
+change colors 
+figure out something with the mobs
 '''
 # import libs
 import pygame as pg
@@ -55,10 +57,10 @@ class Game:
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
-        for i in range(0,10):
-            m = Mob(20,20,(0,255,0))
-            self.all_sprites.add(m)
-            self.enemies.add(m)
+        # for i in range(0,10):
+        #     m = Mob(20,20,(0,255,0))
+        #     self.all_sprites.add(m)
+        #     self.enemies.add(m)
         self.run()
     def run(self):
         self.playing = True
@@ -92,7 +94,7 @@ class Game:
                     self.player.vel.y = 0
 
     def draw(self):
-        self.screen.fill(BLUE)
+        self.screen.fill(WHITE)
         self.all_sprites.draw(self.screen)
         # is this a method or a function?
         pg.display.flip()
