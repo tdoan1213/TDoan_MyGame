@@ -11,7 +11,7 @@
 # Sources: 
 '''
 My goal is:
-add collision to the sides of the screen
+add collision to the sides of the screen through walls 
 change colors 
 figure out something with the mobs
 '''
@@ -42,15 +42,21 @@ class Game:
     def new(self):
         # starting a new game
         self.score = 0
+
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.enemies = pg.sprite.Group()
+        self.walls = pg.sprite.Group()
+
         self.player = Player(self)
         self.plat1 = Platform(WIDTH, 50, 0, HEIGHT-50, (150,150,150), "normal")
-        # self.plat1 = Platform(WIDTH, 50, 0, HEIGHT-50, (150,150,150), "normal")
+        self.wall1 = Wall(WIDTH, 50, 0, HEIGHT, (200,250,200), "left")
+
         self.all_sprites.add(self.plat1)
+        self.all_sprites.add(self.wall1)
 
         self.platforms.add(self.plat1)
+        self.walls.add(self.wall1)
         
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
@@ -61,6 +67,10 @@ class Game:
         #     m = Mob(20,20,(0,255,0))
         #     self.all_sprites.add(m)
         #     self.enemies.add(m)
+        for i in range(0,1):
+            w = Wall(0, HEIGHT - 20, WIDTH, 30, (50,50,50), "left")
+            self.all_sprites.add(w)
+            self.walls.add(w)
         self.run()
     def run(self):
         self.playing = True
