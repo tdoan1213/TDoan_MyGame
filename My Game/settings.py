@@ -22,3 +22,6 @@ PLATFORM_LIST = [(0, HEIGHT - 40, WIDTH, 40, (200,200,200), "normal"),
                  (125, HEIGHT - 350, 100, 5, (200,100,50), "disappearing"),
                  (350, 200, 100, 20, (200,200,200), "normal"),
                  (175, 100, 50, 20, (200,200,200), "normal")]
+
+# wall list
+WALL_LIST = [((0, 0, 50, 600, BLACK, "left")), (WIDTH - 50, 0, 50, 600, BLACK, "right")]

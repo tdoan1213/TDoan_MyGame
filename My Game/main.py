@@ -1,4 +1,4 @@
-# File created by: Chris Cozort
+# File created by: Tim Doan
 # Agenda:
 # gIT GITHUB    
 # Build file and folder structures
@@ -51,14 +51,18 @@ class Game:
         self.player = Player(self)
         self.plat1 = Platform(WIDTH, 50, 0, HEIGHT-50, (150,150,150), "normal")
         self.wall1 = Wall(WIDTH, 50, 0, HEIGHT, (200,250,200), "left")
+        self.wall2 = Wall(WIDTH, 50, 0, HEIGHT, (200,250, 200), "right")
 
         self.all_sprites.add(self.plat1)
         self.all_sprites.add(self.wall1)
+        self.all_sprites.add(self.wall2)
 
         self.platforms.add(self.plat1)
         self.walls.add(self.wall1)
+        self.walls.add(self.wall2)
         
         self.all_sprites.add(self.player)
+        
         for plat in PLATFORM_LIST:
             p = Platform(*plat)
             self.all_sprites.add(p)
@@ -67,8 +71,8 @@ class Game:
         #     m = Mob(20,20,(0,255,0))
         #     self.all_sprites.add(m)
         #     self.enemies.add(m)
-        for i in range(0,1):
-            w = Wall(0, HEIGHT - 20, WIDTH, 30, (50,50,50), "left")
+        for wall in WALL_LIST:
+            w = Wall(*wall)
             self.all_sprites.add(w)
             self.walls.add(w)
         self.run()
@@ -102,6 +106,15 @@ class Game:
                 else:
                     self.player.pos.y = hits[0].rect.top
                     self.player.vel.y = 0
+        if self.player.pos.x < 75:
+            hits = pg.sprite.spritecollide(self.player, self.walls, False)
+            self.player.vel.x = 1
+            print("left wall")
+        if self.player.pos.x > 725:
+            hits = pg.sprite.spritecollide(self.player, self.walls, False)
+            self.player.vel.x = -1
+            print("right wall")
+
 
     def draw(self):
         self.screen.fill(WHITE)

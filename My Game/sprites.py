@@ -129,7 +129,7 @@ class Wall(Sprite):
         self.width = width
         self.height = height
         self.image = pg.Surface((self.width,self.height))
-        self.image.fill(GREEN)
+        self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
